@@ -25,8 +25,43 @@ class RubyTraction
       respond_to(body)
     end
 
-    def web_registration(details={})
-      body = {customer: details}
+    def web_registration(details={}, optional_data={})
+      body = {customer: details,
+              transData: optional_data}
+
+      respond_to(body)
+    end
+
+    def validate_competition_entrant(field, value, entry_code)
+      body = {mode: "VALIDATE",
+              customer: {field => value},
+              entryCode: entry_code}
+       
+      respond_to(body)
+    end
+
+    def add_competition_entrant(details={}, entry_code, subscriptions={}, optional_data={})
+      body = {customer: details,
+              entryCode: entry_code,
+              subscriptions: subscriptions,
+              transData: optional_data}
+       
+      respond_to(body)
+    end
+
+    def draw_competition(venue_ids=[])
+      body = {mode: "DRAW"}
+      body[:venueIdList] = venue_ids if venue_ids.any?
+
+      respond_to(body)
+    end
+
+    def redeem_competition_entrant(field, value, venue_id, redemption_code, optional_data={})
+      body = {mode: "REDEEM",
+              customer: {field => value},
+              venueId: venue_id,
+              redemptionCode: redemption_code,
+              transData: optional_data}
 
       respond_to(body)
     end
