@@ -80,15 +80,16 @@ class RubyTraction
     end
 
     def handle_response(response)
-      if response.code == "200"
+      case response.code
+      when "200"
         JSON.parse(response.body)
-      elsif response.code == "401"
+      when "401"
         { success: false, error: { code: 401, description: "Unauthorised Access", cause: "The API call was not authorised. Check your URL and password details." } }
-      elsif response.code == "404"
+      when "404"
         { success: false, error: { code: 404, description: "Invalid URL", cause: "The URL was incorrect. Check your URL and password details." } }
-      elsif response.code == "503"
+      when "503"
         { success: false, error: { code: 503, description: "API Unavailable", cause: "The API is currently unavailable for upgrade or maintenance." } }
-      elsif response.code == "500"
+      when "500"
         { success: false, error: { code: 500, description: "Other", cause: "Unrecoverable or unknown error - API server may be down" } }
       else
         { success: false, error: { code: 000, description: "Unknown", cause: "Unknown error, possibly internal to gem." } }
