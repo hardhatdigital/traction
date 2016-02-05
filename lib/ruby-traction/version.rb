@@ -1,4 +1,4 @@
-module RubyTraction
-    VERSION = "0.1.0"
-      DATE = "2016-02-05"
+class RubyTraction
+  VERSION = "0.1.0"
+  DATE    = "2016-02-05"
 end
