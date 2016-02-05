@@ -1,4 +1,5 @@
 require "json"
+require "net/http"
 
 class RubyTraction
   class WebConnection
@@ -16,7 +17,7 @@ class RubyTraction
       respond_to(body)
     end
 
-    def add_customer_with_group_and_subscription(details, groups={}, subscriptions={})
+    def add_customer_with_group_and_subscription(details={}, groups={}, subscriptions={})
       body = {customer: details,
               groups: groups,
               subscriptions: subscriptions}
@@ -26,15 +27,15 @@ class RubyTraction
 
    private
 
+    def respond_to(body)
+      handle_response(
+        make_request(body))
+    end
+
     def make_request(body)
       uri = make_uri()
 
       Net::HTTP.post_form(uri, {data: body.to_json, password: @password})
-    end
-
-    def respond_to(body)
-      handle_response(
-        make_request(body))
     end
 
     def handle_response(response)
