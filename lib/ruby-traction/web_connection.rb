@@ -10,11 +10,20 @@ class RubyTraction
       @password = password
     end
 
+    #### REGISTRATION METHODS ####
+    
     def get_customer(field, value, attributes=[])
       body = {customerLookup: {field => value},
               customerAttributes: attributes}
 
-      respond_to(body)
+      get_response_for(body)
+    end
+
+    def add_customer(details={}, optional_data={})
+      body = {customer: details,
+              transData: optional_data}
+
+      get_response_for(body)
     end
 
     def add_customer_with_group_and_subscription(details={}, groups={}, subscriptions={})
@@ -22,22 +31,24 @@ class RubyTraction
               groups: groups,
               subscriptions: subscriptions}
 
-      respond_to(body)
+      get_response_for(body)
     end
 
     def web_registration(details={}, optional_data={})
       body = {customer: details,
               transData: optional_data}
 
-      respond_to(body)
+      get_response_for(body)
     end
+
+    #### COMPETITION METHODS ####
 
     def validate_competition_entrant(field, value, entry_code)
       body = {mode: "VALIDATE",
               customer: {field => value},
               entryCode: entry_code}
        
-      respond_to(body)
+      get_response_for(body)
     end
 
     def add_competition_entrant(details={}, entry_code, subscriptions={}, optional_data={})
@@ -46,14 +57,14 @@ class RubyTraction
               subscriptions: subscriptions,
               transData: optional_data}
        
-      respond_to(body)
+      get_response_for(body)
     end
 
     def draw_competition(venue_ids=[])
       body = {mode: "DRAW"}
       body[:venueIdList] = venue_ids if venue_ids.any?
 
-      respond_to(body)
+      get_response_for(body)
     end
 
     def redeem_competition_entrant(field, value, venue_id, redemption_code, optional_data={})
@@ -63,12 +74,21 @@ class RubyTraction
               redemptionCode: redemption_code,
               transData: optional_data}
 
-      respond_to(body)
+      get_response_for(body)
+    end
+
+    #### TRIGGERED MESSAGE METHODS ####
+
+    def send_triggered_email(email, content={})
+      body = {customer: {EMAIL: email},
+              transData: content}
+
+      get_response_for(body)
     end
 
    private
 
-    def respond_to(body)
+    def get_response_for(body)
       handle_response(
         make_request(body))
     end
