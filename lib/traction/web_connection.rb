@@ -12,7 +12,7 @@ class Traction
 
     #### REGISTRATION METHODS ####
     
-    def get_customer(field, value, attributes=[])
+    def get_customer_by(field, value, attributes=[])
       body = {customerLookup: {field => value},
               customerAttributes: attributes}
 

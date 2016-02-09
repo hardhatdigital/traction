@@ -27,14 +27,15 @@ The available methods in traction depend on ...
 
 # to do
 - add remaining methods currently unavailable due to no existing endpoint
-- documentation
+- documentation - usage examples and ruby docs gen
+- totally should refactor to use sweet singleton/initializer approach
 - provide some abstracted methods for removing subscriptions and groups etc
 
 ## Contributing
 
 Contributions are fully encouraged as the Traction API documentation does not reveal all available methods and new methods are available only when a function is available in the Traction Account dashboard. Simple wrappers and abstractions are welcome.
 
-1. Fork it ( https://github.com/PhilipCastiglione/traction/fork )
+1. Fork it ( https://github.com/hardhatdigital/traction/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
