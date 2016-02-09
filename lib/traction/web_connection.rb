@@ -1,7 +1,7 @@
 require "json"
 require "net/http"
 
-class RubyTraction
+class Traction
   class WebConnection
     DOMAIN = "int.api.tractionplatform.com"
 

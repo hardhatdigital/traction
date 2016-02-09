@@ -1,12 +1,12 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby-traction/version'
+require 'traction/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-traction"
-  spec.version       = RubyTraction::VERSION
-  spec.date          = RubyTraction::DATE
+  spec.name          = "traction"
+  spec.version       = Traction::VERSION
+  spec.date          = Traction::DATE
 
   spec.summary       = ""
   spec.description   = ""

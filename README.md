@@ -1,4 +1,4 @@
-# RubyTraction
+# Traction
 
 A Ruby wrapper of the <a href="https://tractiondigital.com/" target="_blank">Traction Digital</a> API. The wrapper contains only methods for endpoints for which previous access has been established. The addition of new methods when an API is created is encouraged.
 
@@ -9,7 +9,7 @@ Traction Digital <a href="https://int.tractionplatform.com/traction/help/int/web
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'RubyTraction'
+gem 'traction'
 ```
 
 And then execute:
@@ -18,11 +18,11 @@ And then execute:
 
 Or install it yourself using Rubygems:
 
-    $ gem install RubyTraction
+    $ gem install traction
 
 ## Usage
 
-The available methods in RubyTraction depend on ...
+The available methods in traction depend on ...
 
 
 # to do
@@ -34,7 +34,7 @@ The available methods in RubyTraction depend on ...
 
 Contributions are fully encouraged as the Traction API documentation does not reveal all available methods and new methods are available only when a function is available in the Traction Account dashboard. Simple wrappers and abstractions are welcome.
 
-1. Fork it ( https://github.com/PhilipCastiglione/RubyTraction/fork )
+1. Fork it ( https://github.com/PhilipCastiglione/traction/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
