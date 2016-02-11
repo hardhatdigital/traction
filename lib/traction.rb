@@ -1,13 +1,21 @@
 require "traction/web_connection"
 
-class Traction
+module Traction
+  class << self
 
-  def initialize(password)
-    @password = password
+    def configure(password, web_connections={})
+      @password = password
+      @web_connections = web_connections
+      init_connections
+    end
+
+   private
+
+    def init_connections
+      @web_connections.each do |name, path|
+        self.class.send(:define_method, name, Proc.new{ WebConnection.new(path, @password) })
+      end
+    end
+
   end
-
-  def web_connection(path)
-    Traction::WebConnection.new(path, @password)
-  end
-
 end

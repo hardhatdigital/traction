@@ -1,7 +1,7 @@
 require "json"
 require "net/http"
 
-class Traction
+module Traction
   class WebConnection
     DOMAIN = "int.api.tractionplatform.com"
 
@@ -51,7 +51,7 @@ class Traction
       get_response_for(body)
     end
 
-    def add_competition_entrant(details={}, entry_code, subscriptions={}, optional_data={})
+    def add_competition_entrant(details, entry_code, subscriptions={}, optional_data={})
       body = {customer: details,
               entryCode: entry_code,
               subscriptions: subscriptions,
