@@ -28,7 +28,7 @@ The available methods in traction depend on ...
 # to do
 - add remaining methods currently unavailable due to no existing endpoint
 - documentation - usage examples and ruby docs gen
-- totally should refactor to use sweet singleton/initializer approach
+- high level usage examples for rails (using initializer) and not for rails
 - provide some abstracted methods for removing subscriptions and groups etc
 
 ## Contributing
