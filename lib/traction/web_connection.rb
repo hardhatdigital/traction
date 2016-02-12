@@ -2,6 +2,10 @@ require "json"
 require "net/http"
 
 module Traction
+
+  ##
+  # Creates a new WebConnection object to contain wrapped API methods associated with a particular
+  # WebConnection, or Function, in Traction API terminology.
   class WebConnection
     DOMAIN = "int.api.tractionplatform.com"
 
@@ -10,7 +14,15 @@ module Traction
       @password = password
     end
 
-    #### REGISTRATION METHODS ####
+    ##
+    # Registration method for retrieving attributes for a customer, searching against a given field.
+    #
+    # @param field      [String]
+    # @param value      [String]
+    # @param attributes [Array]
+    #
+    # @example
+    #           Traction
     
     def get_customer_by(field, value, attributes=[])
       body = {customerLookup: {field => value},
