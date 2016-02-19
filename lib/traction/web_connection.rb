@@ -25,10 +25,29 @@ module Traction
     #
     # @example
     #           Traction.registration.get_customer_by("EMAIL", "example@email.com", ["EMAIL", "MOBILE", "FIRSTNAME", "LASTNAME"]
-    #       PROVIDE SAMPLE RESPONSE
-    #
-    #           Traction.registration.get_customer_by("EMAIL", "not-there@email.com", ["EMAIL", "MOBILE", "FIRSTNAME", "LASTNAME"]
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=>
+    #           {
+    #             data: {
+    #               customer: {
+    #                 email: "example@email.com",
+    #                 mobile: "0412345678",
+    #                 firstname: "John",
+    #                 lastname: "Doe"
+    #               }
+    #             },
+    #             success: true
+    #           }
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 1010,
+    #               description: "Customer not found",
+    #               cause: [{
+    #                 "field": "customer.EMAIL"
+    #               }]
+    #             }
+    #           }
     def get_customer_by(field, value, attributes=[])
       body = {customerLookup: {field => value},
               customerAttributes: attributes}
@@ -40,11 +59,24 @@ module Traction
     # Registration method for adding a customer to the campaign customer list.
     #
     # @param details       [Hash] The customer details to add.
-    # @param optional_data [Hash] Optional. Data available in triggered confirmation emails to the customer.
+    # @param optional_data [Hash] Optional. Data available in triggered emails to the customer.
     #
     # @example
     #           Traction.registration.add_customer("EMAIL" => "example@email.com", "MOBILE" => "0412345678", "FIRSTNAME" => "John", "LASTNAME" => "Doe")
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 1000,
+    #               description: "Invalid Parameter Data",
+    #               cause: [{
+    #                 field: "customer.EMAIL",
+    #                 message: "invalid email address"
+    #               }]
+    #             },
+    #             success: false
+    #           }
     def add_customer(details, optional_data={})
       body = {customer: details,
               transData: optional_data}
@@ -62,7 +94,17 @@ module Traction
     #
     # @example
     #           Traction.registration.add_customer_with_group_and_subscription({"EMAIL" => "example@email.com", "MOBILE" => "0412345678", "FIRSTNAME" => "John", "LASTNAME" => "Doe"}, {"12345" => true, "12346" => true, "23456" => false}, {"9876543210" => "SUBSCRIBE", "9876543211" => "SUBSCRIBE", "9876543212" => "UNSUBSCRIBE"})
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 1150,
+    #               description: "Invalid Group ID, please confirm group exists",
+    #               cause: "Group Id [12345] should be pre-existing"
+    #             },
+    #             success: false
+    #           }
     def add_customer_with_group_and_subscription(details, groups={}, subscriptions={})
       body = {customer: details,
               groups: groups,
@@ -76,11 +118,24 @@ module Traction
     # of the function in traction.
     #
     # @param details       [Hash] The customer details to add.
-    # @param optional_data [Hash] Optional. Data available in triggered confirmation emails to the customer.
+    # @param optional_data [Hash] Optional. Data available in triggered emails to the customer.
     #
     # @example
     #           Traction.registration.add_customer("EMAIL" => "example@email.com", "MOBILE" => "0412345678", "FIRSTNAME" => "John", "LASTNAME" => "Doe")
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 1000,
+    #               description: "Invalid Parameter Data",
+    #               cause: [{
+    #                 field: "customer.EMAIL",
+    #                 message: "invalid email address"
+    #               }]
+    #             },
+    #             success: false
+    #           }
     def web_registration(details, optional_data={})
       body = {customer: details,
               transData: optional_data}
@@ -97,7 +152,20 @@ module Traction
     #
     # @example
     #           Traction.competition.validate_entry("EMAIL", "example@email.com", "ABC123")
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 2040,
+    #               description: "Entry Code Used",
+    #               cause: [{
+    #                 field: "entryCode",
+    #                 message: "[ABC123]  has already been used"
+    #               }]
+    #             },
+    #             success: false
+    #           }
     def validate_entry(field, value, entry_code)
       body = {mode: "VALIDATE",
               customer: {field => value},
@@ -110,13 +178,26 @@ module Traction
     # Competition method for adding an entrant to (or removing an entrant from) a competition.
     #
     # @param details       [Hash]    The customer details to add.
-    # @param entry_code    [String]  The entry code to validate.
+    # @param entry_code    [String]  The entry code for the entrant.
     # @param subscribe     [Boolean] Optional. Subscribe (true) or unsubscribe (false) from the competition. Defaults to true.
-    # @param optional_data [Hash]    Optional. Data available in triggered confirmation emails to the customer.
+    # @param optional_data [Hash]    Optional. Data available in triggered emails to the customer.
     #
     # @example
     #           Traction.competition.add_competition_entrant({"EMAIL" => "example@email.com", "MOBILE" => "0412345678", "FIRSTNAME" => "Jane", "LASTNAME" => "Doe"}, "XYZ123")
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 2040,
+    #               description: "Entry Code Used",
+    #               cause: [{
+    #                 field: "entryCode",
+    #                 message: "[XYZ123]  has already been used"
+    #               }]
+    #             },
+    #             success: false
+    #           }
     def add_competition_entrant(details, entry_code, subscribe=true, optional_data={})
       body = {customer: details,
               entryCode: entry_code,
@@ -133,7 +214,17 @@ module Traction
     #
     # @example
     #           Traction.competition.draw
-    #       PROVIDE SAMPLE RESPONSE
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 2140,
+    #               description: "Draw already done",
+    #               cause: null
+    #             },
+    #             success: false
+    #           }
     def draw_competition(venue_ids=[])
       body = {mode: "DRAW"}
       body[:venueIdList] = venue_ids if venue_ids.any?
@@ -141,7 +232,36 @@ module Traction
       get_response_for(body)
     end
 
-    def redeem_competition_entrant(field, value, venue_id, redemption_code, optional_data={})
+    ##
+    # Competition method for providing redemption code to a winner.
+    #
+    # @param field           [String] The field to search against.
+    # @param value           [String] The value to search for.
+    # @param venues_id       [String] Id of venue for which redemption code and customer apply.
+    # @param redemption_code [String] The redemption code for the winner.
+    # @param optional_data   [Hash]   Optional. Data available in triggered emails to the customer.
+    #
+    # @example
+    #           Traction.competition.redeem_winner("EMAIL", "example@email.com", "XYZ", "ABC123") 
+    #           #=>
+    #           {
+    #             data: {
+    #               numWinners: 8,
+    #               numWinnersNoRedemptionCode: 2
+    #             },
+    #             success: true
+    #           }
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 2120,
+    #               description: "Claim code invalid",
+    #               cause: null
+    #             },
+    #             success: false
+    #           }
+    def redeem_winner(field, value, venue_id, redemption_code, optional_data={})
       body = {mode: "REDEEM",
               customer: {field => value},
               venueId: venue_id,
@@ -151,11 +271,32 @@ module Traction
       get_response_for(body)
     end
 
-    #### TRIGGERED MESSAGE METHODS ####
-
-    def send_triggered_email(email, content={})
+    ##
+    # Triggered Message method for sending a triggered email to a subscriber. The content of the email
+    # can be personalised with optional data, but should already exist in traction.
+    #
+    # @param email         [String] The email to search against.
+    # @param optional_data [Hash]   Optional. Data available in triggered emails to the customer.
+    #
+    # @example
+    #           Traction.triggered.send_triggered_email("example@email.com")
+    #           #=> {data: {}, success: true}
+    #           # OR
+    #           #=>
+    #           {
+    #             error: {
+    #               code: 1000,
+    #               description: "Invalid Parameter Data",
+    #               cause: [{
+    #                 field: "customer.Email",
+    #                 message: "Invalid Email Address"
+    #               }]
+    #             },
+    #             success: false
+    #           }
+    def send_triggered_email(email, optional_data={})
       body = {customer: {EMAIL: email},
-              transData: content}
+              transData: optional_data}
 
       get_response_for(body)
     end

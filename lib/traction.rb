@@ -20,9 +20,9 @@ module Traction
   # @param web_connection_paths [Hash]   The namespaces and paths for each "function" eg. "/wkf/81h2ehc781hjd"
   #
   # @example
-  #           Traction.configure("<your_api_password>", { competition: "<web_connection_path>",
-  #                                                       registration: "<web_connection_path>" }
-  #       PROVIDE SAMPLE RESPONSE
+  #           Traction.configure("<your_api_password>", {competition:  "<web_connection_path>",
+  #                                                      registration: "<web_connection_path>",
+  #                                                      triggered:    "<web_connection_path>"}
   def self.configure(password, web_connection_paths={})
     web_connection_paths.each do |name, path|
       raise ArgumentError, "!ERROR: Unable to define a web_connection_paths path with name: #{name} as this is a reserved name." if self.class.respond_to?(name)
