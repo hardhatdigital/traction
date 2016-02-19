@@ -1,10 +1,8 @@
 require "traction/web_connection"
 
-##
 # The Traction module houses methods to interact with the Traction API.
 module Traction
 
-  ##
   # Configure Traction with your API password and an object containing keys that become namespaces
   # and paths associated with a "web connection" available to you in your Traction account.
   # These paths are found in "API Information" in the Traction Account Dashboard, for a function

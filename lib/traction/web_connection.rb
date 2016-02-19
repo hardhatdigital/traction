@@ -3,7 +3,6 @@ require "net/http"
 
 module Traction
 
-  ##
   # Creates a new WebConnection object to contain wrapped API methods associated with a particular
   # WebConnection, or Function, in Traction API terminology.
   #
@@ -16,7 +15,6 @@ module Traction
       @password = password
     end
 
-    ##
     # Registration method for retrieving attributes for a customer, searching against a given field.
     #
     # @param field      [String] The field to search against.
@@ -26,28 +24,28 @@ module Traction
     # @example
     #           Traction.registration.get_customer_by("EMAIL", "example@email.com", ["EMAIL", "MOBILE", "FIRSTNAME", "LASTNAME"]
     #           #=>
-    #           {
-    #             data: {
-    #               customer: {
-    #                 email: "example@email.com",
-    #                 mobile: "0412345678",
-    #                 firstname: "John",
-    #                 lastname: "Doe"
-    #               }
-    #             },
-    #             success: true
-    #           }
+    #           #{
+    #           #  data: {
+    #           #    customer: {
+    #           #      email: "example@email.com",
+    #           #      mobile: "0412345678",
+    #           #      firstname: "John",
+    #           #      lastname: "Doe"
+    #           #    }
+    #           #  },
+    #           #  success: true
+    #           #}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 1010,
-    #               description: "Customer not found",
-    #               cause: [{
-    #                 "field": "customer.EMAIL"
-    #               }]
-    #             }
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 1010,
+    #           #    description: "Customer not found",
+    #           #    cause: [{
+    #           #      "field": "customer.EMAIL"
+    #           #    }]
+    #           #  }
+    #           #}
     def get_customer_by(field, value, attributes=[])
       body = {customerLookup: {field => value},
               customerAttributes: attributes}
@@ -55,7 +53,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Registration method for adding a customer to the campaign customer list.
     #
     # @param details       [Hash] The customer details to add.
@@ -66,17 +63,17 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 1000,
-    #               description: "Invalid Parameter Data",
-    #               cause: [{
-    #                 field: "customer.EMAIL",
-    #                 message: "invalid email address"
-    #               }]
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 1000,
+    #           #    description: "Invalid Parameter Data",
+    #           #    cause: [{
+    #           #      field: "customer.EMAIL",
+    #           #      message: "invalid email address"
+    #           #    }]
+    #           #  },
+    #           #  success: false
+    #           #}
     def add_customer(details, optional_data={})
       body = {customer: details,
               transData: optional_data}
@@ -84,7 +81,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Registration method for adding a customer to the campaign customer list, and associating the customer
     # with (or dissociating a customer from) groups and/or subscriptions.
     #
@@ -97,14 +93,14 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 1150,
-    #               description: "Invalid Group ID, please confirm group exists",
-    #               cause: "Group Id [12345] should be pre-existing"
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 1150,
+    #           #    description: "Invalid Group ID, please confirm group exists",
+    #           #    cause: "Group Id [12345] should be pre-existing"
+    #           #  },
+    #           #  success: false
+    #           #}
     def add_customer_with_group_and_subscription(details, groups={}, subscriptions={})
       body = {customer: details,
               groups: groups,
@@ -113,7 +109,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Registration method for adding a customer directly to an associated email list, selected on creation
     # of the function in traction.
     #
@@ -125,17 +120,17 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 1000,
-    #               description: "Invalid Parameter Data",
-    #               cause: [{
-    #                 field: "customer.EMAIL",
-    #                 message: "invalid email address"
-    #               }]
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 1000,
+    #           #    description: "Invalid Parameter Data",
+    #           #    cause: [{
+    #           #      field: "customer.EMAIL",
+    #           #      message: "invalid email address"
+    #           #    }]
+    #           #  },
+    #           #  success: false
+    #           #}
     def web_registration(details, optional_data={})
       body = {customer: details,
               transData: optional_data}
@@ -143,7 +138,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Competition method for validating a potential entry to a competition.
     #
     # @param field      [String] The relevant customer field to validate with.
@@ -155,17 +149,17 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 2040,
-    #               description: "Entry Code Used",
-    #               cause: [{
-    #                 field: "entryCode",
-    #                 message: "[ABC123]  has already been used"
-    #               }]
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 2040,
+    #           #    description: "Entry Code Used",
+    #           #    cause: [{
+    #           #      field: "entryCode",
+    #           #      message: "[ABC123]  has already been used"
+    #           #    }]
+    #           #  },
+    #           #  success: false
+    #           #}
     def validate_entry(field, value, entry_code)
       body = {mode: "VALIDATE",
               customer: {field => value},
@@ -174,7 +168,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Competition method for adding an entrant to (or removing an entrant from) a competition.
     #
     # @param details       [Hash]    The customer details to add.
@@ -187,17 +180,17 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 2040,
-    #               description: "Entry Code Used",
-    #               cause: [{
-    #                 field: "entryCode",
-    #                 message: "[XYZ123]  has already been used"
-    #               }]
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 2040,
+    #           #    description: "Entry Code Used",
+    #           #    cause: [{
+    #           #      field: "entryCode",
+    #           #      message: "[XYZ123]  has already been used"
+    #           #    }]
+    #           #  },
+    #           #  success: false
+    #           #}
     def add_competition_entrant(details, entry_code, subscribe=true, optional_data={})
       body = {customer: details,
               entryCode: entry_code,
@@ -207,7 +200,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Competition method for drawing the competition winner/s.
     #
     # @param venues_ids [Array] Optional. List of venues for which the winner is drawn from. Defaults to all venues.
@@ -217,14 +209,14 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 2140,
-    #               description: "Draw already done",
-    #               cause: null
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 2140,
+    #           #    description: "Draw already done",
+    #           #    cause: null
+    #           #  },
+    #           #  success: false
+    #           #}
     def draw_competition(venue_ids=[])
       body = {mode: "DRAW"}
       body[:venueIdList] = venue_ids if venue_ids.any?
@@ -232,7 +224,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Competition method for providing redemption code to a winner.
     #
     # @param field           [String] The field to search against.
@@ -244,23 +235,23 @@ module Traction
     # @example
     #           Traction.competition.redeem_winner("EMAIL", "example@email.com", "XYZ", "ABC123") 
     #           #=>
-    #           {
-    #             data: {
-    #               numWinners: 8,
-    #               numWinnersNoRedemptionCode: 2
-    #             },
-    #             success: true
-    #           }
+    #           #{
+    #           #  data: {
+    #           #    numWinners: 8,
+    #           #    numWinnersNoRedemptionCode: 2
+    #           #  },
+    #           #  success: true
+    #           #}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 2120,
-    #               description: "Claim code invalid",
-    #               cause: null
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 2120,
+    #           #    description: "Claim code invalid",
+    #           #    cause: null
+    #           #  },
+    #           #  success: false
+    #           #}
     def redeem_winner(field, value, venue_id, redemption_code, optional_data={})
       body = {mode: "REDEEM",
               customer: {field => value},
@@ -271,7 +262,6 @@ module Traction
       get_response_for(body)
     end
 
-    ##
     # Triggered Message method for sending a triggered email to a subscriber. The content of the email
     # can be personalised with optional data, but should already exist in traction.
     #
@@ -283,17 +273,17 @@ module Traction
     #           #=> {data: {}, success: true}
     #           # OR
     #           #=>
-    #           {
-    #             error: {
-    #               code: 1000,
-    #               description: "Invalid Parameter Data",
-    #               cause: [{
-    #                 field: "customer.Email",
-    #                 message: "Invalid Email Address"
-    #               }]
-    #             },
-    #             success: false
-    #           }
+    #           #{
+    #           #  error: {
+    #           #    code: 1000,
+    #           #    description: "Invalid Parameter Data",
+    #           #    cause: [{
+    #           #      field: "customer.Email",
+    #           #      message: "Invalid Email Address"
+    #           #    }]
+    #           #  },
+    #           #  success: false
+    #           #}
     def send_triggered_email(email, optional_data={})
       body = {customer: {EMAIL: email},
               transData: optional_data}
