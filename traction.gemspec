@@ -8,12 +8,12 @@ Gem::Specification.new do |spec|
   spec.version       = Traction::VERSION
   spec.date          = Traction::DATE
 
-  spec.summary       = ""
-  spec.description   = ""
+  spec.summary       = "A Ruby wrapper of the Traction Digital API"
+  spec.description   = "A Ruby wrapper of the Traction Digital API. The wrapper contains only methods for endpoints for which previous access has been established. The addition of new methods when an API is created is encouraged."
 
-  spec.authors       = [""]
-  spec.email         = [""]
-  spec.homepage      = ""
+  spec.authors       = ["Philip Castiglione", "Andrew Buntine"]
+  spec.email         = ["philipcastiglione@gmail.com", "dev@hhd.com.au"]
+  spec.homepage      = "https://github.com/hardhatdigital/traction"
 
   spec.license       = "MIT"
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "pry"
 end
