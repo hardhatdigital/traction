@@ -22,7 +22,7 @@ Or install it yourself using Rubygems:
 
 ## Usage
 
-Configure Traction with your API password and an object containing keys that become namespaces and paths associated with a "web connection" available to you in your Traction account. These paths are found in "API Information" in the Traction Account Dashboard, for a function within a given campaign.
+Configure Traction with your API password and an object containing keys that become namespaces and paths associated with a "web connection" available to you in your Traction account. These paths are found in "API Information" in the Traction Account Dashboard, for a function within a given campaign. Note that the web connection path is only the part after "https://int.api.tractionplatform.com/". This will be something like "wkf/jo2nk2ejn7x4njens5wo".
 
 The available methods in traction depend on the functions created in the traction dashboard for a given campaign. To confirm a method is available, ensure that a traction function exists with the method detailed in the API Information tab.
 
