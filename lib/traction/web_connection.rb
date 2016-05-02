@@ -310,6 +310,8 @@ module Traction
         JSON.parse(response.body)
       when "401"
         { success: false, error: { code: 401, description: "Unauthorised Access", cause: "The API call was not authorised. Check your URL and password details." } }
+      when "403"
+        { success: false, error: { code: 403, description: "Forbidden", cause: "The API call was forbidden. Often this means the URL was incorrect. Check your URL and password details." } }
       when "404"
         { success: false, error: { code: 404, description: "Invalid URL", cause: "The URL was incorrect. Check your URL and password details." } }
       when "503"
