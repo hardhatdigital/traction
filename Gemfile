@@ -4,3 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem "bundler", ">= 2.2.10"
+
+gem "rake", ">= 12.3.3"
